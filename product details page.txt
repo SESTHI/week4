@@ -1,0 +1,20 @@
+$routes->get('product/(:segment)', 'ProductController::showProduct/$1');
+
+<?php
+
+namespace App\Controllers;
+
+use App\Models\ProductModel;
+
+class ProductController extends BaseController
+{
+    public function showProduct($productId)
+    {
+        // Retrieve product details from the database based on $productId
+        $productModel = new ProductModel();
+        $product = $productModel->find($productId);
+
+        // Pass the product data to the view
+        return view('product_details', ['product' => $product]);
+    }
+}

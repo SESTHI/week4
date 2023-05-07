@@ -1,0 +1,21 @@
+routes->get('profile/(:num)', 'ProfileController::showProfile/$1');
+
+
+<?php
+
+namespace App\Controllers;
+
+use App\Models\UserModel;
+
+class ProfileController extends BaseController
+{
+    public function showProfile($userId)
+    {
+        // Retrieve user information from the database based on $userId
+        $userModel = new UserModel();
+        $user = $userModel->find($userId);
+
+        // Pass the user data to the view
+        return view('profile', ['user' => $user]);
+    }
+}
